@@ -1,9 +1,17 @@
+import os
 from time import sleep
+
 import requests
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-import config
-import os
+
+try:
+    import config
+except:
+    with open("config.py", 'w') as config_file:
+        config_file.write("SPOTIPY_CLIENT_ID = 'CLIENT_ID'\nSPOTIPY_CLIENT_SECRET = 'CLIENT_SECRET'")
+    print("Please identify your client in the config.py file")
+    exit(0)
 
 
 class waveID():
