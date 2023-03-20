@@ -54,6 +54,7 @@ class waveID():
             return isPlaying, songTitle, artists, imageUrl, progessString
         except Exception as e:
             print(f"ERR: {e}")
+            sleep(2)
             return False, None, None, None, None
 
     def updateState(self):
@@ -90,15 +91,15 @@ class waveID():
         for artist in artists:
             artist_string += f"{artist}, "
         artist_string = artist_string[:-2]
-        if len(artist_string) >= 40:
-            artist_string = f"{artist_string[:37]}..."
+        max_artist_length = 25
+        if len(artist_string) >= max_artist_length:
+            artist_string = f"{artist_string[:max_artist_length - 3]}..."
         with open("artist.txt", 'w') as artist_file:
             print(f"Changing artist to {artist_string}")
             artist_file.write(artist_string)
 
     def writeProgress(self, progressString):
         with open("progress.txt", 'w') as progress_file:
-            #print(f"Progress: {progressString}")
             progress_file.write(progressString)
 
     def setPlay(self, play=False):
@@ -122,4 +123,4 @@ class waveID():
 wave = waveID()
 while True:
     wave.updateState()
-    sleep(1)
+    sleep(0.5)
